@@ -2,7 +2,6 @@ import streamlit as st
 from ultralytics import YOLO
 from PIL import Image
 import numpy as np
-import cv2
 import os
 import tempfile
 
@@ -29,9 +28,9 @@ if uploaded_file is not None:
         image.save(tmp.name)
         result = model.predict(source=tmp.name, imgsz=640, conf=0.25)[0]
 
-    plotted = result.plot()  # BGR
-    plotted_rgb = cv2.cvtColor(plotted, cv2.COLOR_BGR2RGB)
-    st.image(plotted_rgb, caption="Hasil deteksi", use_column_width=True)
+    # langsung pakai hasil plot dari Ultralytics tanpa cv2
+    plotted = result.plot()  # numpy array
+    st.image(plotted, caption="Hasil deteksi", use_column_width=True)
 
     if result.boxes is not None and len(result.boxes) > 0:
         st.subheader("Detail deteksi")
