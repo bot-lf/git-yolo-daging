@@ -1,0 +1,18 @@
+path: ./dataset
+
+train: train/images
+val: valid/images
+test: test/images    # kalau folder test/images memang ada, kalau tidak ada baris ini boleh dihapus
+
+nc: 3
+names:
+  - Busuk
+  - Segar
+  - setengahSegar
+
+roboflow:
+  license: CC BY 4.0
+  project: deteksi-kesegaran-daging
+  url: https://universe.roboflow.com/project/deteksi-kesegaran-daging/dataset/1
+  version: 1
+  workspace: project

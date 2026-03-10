@@ -1,0 +1,9 @@
+venv/
+__pycache__/
+runs/
+*.pt
+*.pth
+*jpg
+*.png
+*mp4
+*.log
