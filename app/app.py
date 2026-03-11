@@ -1,5 +1,4 @@
 import streamlit as st
-import cv2
 import numpy as np
 from PIL import Image
 from ultralytics import YOLO
@@ -71,23 +70,21 @@ if uploaded_file is not None:
     image = Image.open(uploaded_file).convert("RGB")
     st.image(image, caption="Gambar upload", use_column_width=True)
 
-    # Convert ke OpenCV (BGR)
-    img_cv = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
+    # jadi numpy RGB
+    img_array = np.array(image)
 
     # Inference YOLO11
     with st.spinner("Sedang mendeteksi kesegaran daging..."):
         results = model(
-            img_cv,
+            img_array,
             conf=confidence,
             iou=iou_thres,
             verbose=False
         )
 
-    # Gambar hasil deteksi
-    res_img_bgr = results[0].plot()              # numpy BGR
-    res_img_rgb = cv2.cvtColor(res_img_bgr, cv2.COLOR_BGR2RGB)
-
-    st.image(res_img_rgb, caption="Deteksi Kesegaran (YOLO11)", use_column_width=True)
+    # Gambar hasil deteksi (Ultralytics handle sendiri)
+    res_img = results[0].plot()  # numpy array, bisa langsung ke st.image
+    st.image(res_img, caption="Deteksi Kesegaran (YOLO11)", use_column_width=True)
 
     # Detail hasil
     boxes = results[0].boxes
