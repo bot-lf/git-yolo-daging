@@ -14,7 +14,7 @@ def load_model():
     base_dir = os.path.dirname(os.path.abspath(__file__))
 
     # GANTI nama file model di sini kalau beda
-    model_filename = "bes.pt"  # contoh: model YOLO11 custom kamu
+    model_filename = "best.pt"  # contoh: model YOLO11 custom kamu
     model_path = os.path.join(base_dir, model_filename)
 
     if os.path.exists(model_path):
